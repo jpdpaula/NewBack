@@ -22,41 +22,37 @@ public class UsersController {
     static ResponseEndPoints res = new ResponseEndPoints();
 
     private static List<Users> usersList = new ArrayList<>();
+
     public static class UsersHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
 
-            if ("GET".equals(exchange.getRequestMethod())){
+            if ("GET".equals(exchange.getRequestMethod())) {
                 doGet(exchange);
-            }
-            else if ("POST".equals(exchange.getRequestMethod())){
+            } else if ("POST".equals(exchange.getRequestMethod())) {
                 doPost(exchange);
-            }
-            else if ("DELETE".equals(exchange.getRequestMethod())) {
+            } else if ("DELETE".equals(exchange.getRequestMethod())) {
                 doDelete(exchange);
-            }
-            else if ("PUT".equals(exchange.getRequestMethod())){
+            } else if ("PUT".equals(exchange.getRequestMethod())) {
                 doPut(exchange);
-            }
-            else if ("OPTIONS".equals(exchange.getRequestMethod())){
-               doOptions(exchange);
-            }
-            else {
+            } else if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                doOptions(exchange);
+            } else {
                 response = "nao definido." + "O metodo utilizado foi: " + exchange.getRequestMethod() + " So aceitamos get, put, post e delete";
                 res.enviarResponse(exchange, response, 405);
             }
         }
     }
 
-    public static void doGet(HttpExchange exchange) throws IOException{
+    public static void doGet(HttpExchange exchange) throws IOException {
         UserDal userDal = new UserDal();
 
         List<Users> getAllFromArray = Users.getAllUsers(usersList);
 
-        if(!getAllFromArray.isEmpty()){
+        if (!getAllFromArray.isEmpty()) {
             Users users = new Users();
-            for(Users usersJson : getAllFromArray){
-                System.out.println("Nome: " + usersJson.getNome());
+            for (Users usersJson : getAllFromArray) {
+                System.out.println("Nome: " + usersJson.getName());
                 System.out.println("Sobrenome: " + usersJson.getLastName());
                 System.out.println("Idade: " + usersJson.getAge());
                 System.out.println("Endereço: " + usersJson.getAddress());
@@ -66,9 +62,9 @@ public class UsersController {
                 System.out.println(" ");
             }
 
-            try{
+            try {
                 userDal.listarUsuario();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("O erro foi: " + e);
             }
 
@@ -77,16 +73,16 @@ public class UsersController {
 
             response = "Dados encontrados com sucesso";
             res.enviarResponseJson(exchange, users.arrayToJson(getAllFromArray), 201);
-        }else{
+        } else {
             response = "Dados não encontrados";
-            res.enviarResponse(exchange, response,405);
+            res.enviarResponse(exchange, response, 405);
         }
     }
 
-    public static void doPost(HttpExchange exchange) throws IOException{
+    public static void doPost(HttpExchange exchange) throws IOException {
         UserDal userDal = new UserDal();
 
-        try(InputStream requestBody = exchange.getRequestBody()){
+        try (InputStream requestBody = exchange.getRequestBody()) {
             JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
             int resp = 0;
 
@@ -102,17 +98,17 @@ public class UsersController {
 
             usersList.add(users);
 
-            resp = userDal.inserirUsuario(users.nome, users.lastName, users.age,
+            resp = userDal.inserirUsuario(users.name, users.lastName, users.age,
                     users.address, users.email, users.password, users.cpf);
 
-            if(resp == 0){
+            if (resp == 0) {
                 response = "Houve um problema ao criar usuário";
-            }else{
+            } else {
                 response = "Usuário criado com sucesso";
             }
 
             res.enviarResponse(exchange, response, 200);
-        }catch(Exception e){
+        } catch (Exception e) {
             response = e.toString();
 
             System.out.println(response);
@@ -122,10 +118,10 @@ public class UsersController {
         }
     }
 
-    public static void doDelete(HttpExchange exchange) throws IOException{
+    public static void doDelete(HttpExchange exchange) throws IOException {
         UserDal userDal = new UserDal();
 
-        try(InputStream requestBody = exchange.getRequestBody()){
+        try (InputStream requestBody = exchange.getRequestBody()) {
             JSONObject json = new JSONObject(new String(requestBody.readAllBytes()));
             int resp = 0;
 
@@ -133,14 +129,14 @@ public class UsersController {
 
             resp = userDal.excluirUsuario(id);
 
-            if(resp == 0){
+            if (resp == 0) {
                 response = "Houve um problema ao deletar usuário";
-            }else{
+            } else {
                 response = "Usuário deletado com sucesso";
             }
 
             res.enviarResponse(exchange, response, 200);
-        }catch(Exception e){
+        } catch (Exception e) {
             response = e.toString();
 
             System.out.println(response);
@@ -152,7 +148,7 @@ public class UsersController {
         res.enviarResponse(exchange, response, 200);
     }
 
-    public static void doPut(HttpExchange exchange) throws IOException{
+    public static void doPut(HttpExchange exchange) throws IOException {
 //        UserDal userDal = new UserDal();
 //
 //        try(InputStream requestBody = exchange.getRequestBody()){
@@ -193,8 +189,8 @@ public class UsersController {
     }
 
 
-    public static void doOptions(HttpExchange exchange) throws IOException{
-        exchange.sendResponseHeaders(204,-1);
+    public static void doOptions(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(204, -1);
         exchange.close();
         return;
     }

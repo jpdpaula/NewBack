@@ -41,14 +41,14 @@ public class UserDal {
     }
 
     //Inserir - Create
-    public int inserirUsuario(String nome, String lastName, int age, String address,
+    public int inserirUsuario(String name, String lastName, int age, String address,
                                String email, String password, String cpf) throws SQLException{
         String sql = "INSERT INTO Users (nome, lastName, age, address, email, password, cpf) VALUES(?, ?, ?, ?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, nome);
+            statement.setString(1, name);
             statement.setString(2, lastName);
             statement.setInt(3, age);
             statement.setString(4, address);
@@ -81,7 +81,7 @@ public class UserDal {
 
             while (result.next()){
                 int id = result.getInt("id");
-                String nome = result.getString("nome");
+                String name = result.getString("name");
                 String lastName = result.getString("lastName");
                 int age = result.getInt("age");
                 String address = result.getString("address");
@@ -90,7 +90,7 @@ public class UserDal {
                 String cpf = result.getString("cpf");
 
                 System.out.println("id: " + id);
-                System.out.println("nome: " + nome);
+                System.out.println("nome: " + name);
                 System.out.println("lastName: " + lastName);
                 System.out.println("age: " + age);
                 System.out.println("address: " + address);
@@ -108,13 +108,13 @@ public class UserDal {
 
     }
 
-    public int atualizarUsuario(String nome, String lastName, int age, String address,
+    public int atualizarUsuario(String name, String lastName, int age, String address,
                                 String email, String password, String cpf, int id) throws SQLException{
         String sql = "UPDATE Users SET nome = ?, lastName = ?, age = ?, address = ?, email = ?, password = ?, cpf = ?< WHERE id = ?";
         int linhasAfetadas = 0;
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, nome);
+            statement.setString(1, name);
             statement.setString(2, lastName);
             statement.setInt(3, age);
             statement.setString(4, address);

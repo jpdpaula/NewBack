@@ -24,19 +24,19 @@ public class TelaCadastros {
         System.out.println("Preencha corretamente os dados abaixo: ");
         System.out.println(" ");
         System.out.println("Digite a sua imagem");
-        vendedor.image = sc.nextLine();
-        System.out.println(" ");
-        System.out.println("Digite a sua imagem");
-        vendedor.titulo = sc.nextLine();
-        System.out.println(" ");
-        System.out.println("Digite a sua imagem");
-        vendedor.subtitulo = sc.nextLine();
-        System.out.println(" ");
-
-        System.out.println("Cadastro de vendas realizado com sucesso:");
-        System.out.println("Nome: " + vendedor.image);
-        System.out.println("Sobrenome: " + vendedor.titulo);
-        System.out.println("Telefone: " + vendedor.subtitulo);
+//        vendedor.image = sc.nextLine();
+//        System.out.println(" ");
+//        System.out.println("Digite a sua imagem");
+//        vendedor.titulo = sc.nextLine();
+//        System.out.println(" ");
+//        System.out.println("Digite a sua imagem");
+//        vendedor.subtitulo = sc.nextLine();
+//        System.out.println(" ");
+//
+//        System.out.println("Cadastro de vendas realizado com sucesso:");
+//        System.out.println("Nome: " + vendedor.image);
+//        System.out.println("Sobrenome: " + vendedor.titulo);
+//        System.out.println("Telefone: " + vendedor.subtitulo);
 
         rota.rotasReturn(resposta);
     }
@@ -48,7 +48,7 @@ public class TelaCadastros {
         System.out.println("Preencha corretamente os dados abaixo: ");
         System.out.println(" ");
         System.out.println("Digite o seu primeiro nome");
-        cliente.nome = sc.nextLine();
+        cliente.name = sc.nextLine();
         System.out.println(" ");
         System.out.println("Digite o seu sobrenome");
         cliente.lastName = sc.nextLine();
@@ -70,7 +70,7 @@ public class TelaCadastros {
         System.out.println(" ");
 
         System.out.println("Cadastro de cliente realizado com sucesso:");
-        System.out.println("Nome: " + cliente.nome + " " + cliente.lastName);
+        System.out.println("Nome: " + cliente.name + " " + cliente.lastName);
         System.out.println("Idade: " + cliente.age);
         System.out.println("Endereço: " + cliente.address);
         System.out.println("E-mail: " + cliente.email);

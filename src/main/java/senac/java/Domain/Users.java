@@ -2,26 +2,25 @@ package senac.java.Domain;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Users {
+
     int id = 0;
-    public static String nome = "";
-    public static String lastName = "";
-    public static int age = 0;
-    public static String address = "";
-    public static String email = "";
-    public static String password = "";
-    public static String cpf = "";
+    public  String name = "";
+    public  String lastName = "";
+    public  int age = 0;
+    public String address = "";
+    public String email = "";
+    public  String password = "";
+    public  String cpf = "";
 
     public Users(){
     }
 
-    public Users(String nome, String lastName, int age,
-                 String address, String email, String password,
-                 String cpf){
-
-        this.nome = nome;
+    public Users(String name, String lastName, int age, String address, String email, String password, String cpf){
+        this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.address = address;
@@ -30,12 +29,12 @@ public class Users {
         this.cpf = cpf;
     }
 
-    public String getNome(){
-        return nome;
+    public String getName(){
+        return name;
     }
 
     public void setName(String name){
-        this.nome = name;
+        this.name = name;
     }
 
     public String getLastName(){
@@ -90,7 +89,7 @@ public class Users {
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
 
-        json.put("name", nome);
+        json.put("name", name);
         json.put("lastName", lastName);
         json.put("age", age);
         json.put("address", address);
@@ -105,23 +104,24 @@ public class Users {
         JSONObject json = new JSONObject();
 
         if (!usersList.isEmpty()) {
-            var keyJson = 1;
+            var keyJson = 0;
 
             for (Users users : usersList) {
 
                 JSONObject jsonFor = new JSONObject();
 
-                jsonFor.put("name", users.getNome());
+                jsonFor.put("name", users.getName());
                 jsonFor.put("lastName", users.getLastName());
                 jsonFor.put("age", users.getAge());
-                jsonFor.put("address", users.getAddress());
+                jsonFor.put("address",users.getAddress());
                 jsonFor.put("email", users.getEmail());
                 jsonFor.put("password", users.getPassword());
-                jsonFor.put("cpf", users.getCpf());
+                jsonFor.put("cpf",users.getCpf());
 
                 json.put(String.valueOf(keyJson), jsonFor);
 
                 keyJson++;
+
             }
             return json;
         }
@@ -131,10 +131,12 @@ public class Users {
         }
     }
 
-    public static Users getUsers(int index, List<Users> usersList){
-        if(index >= 0 && index < usersList.size()) {
+    public static Users getUser(int index, List<Users> usersList){
+
+        if(index >= 0 && index < usersList.size())  {
 
             return usersList.get(index);
+
         }
 
         else{

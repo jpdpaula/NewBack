@@ -12,15 +12,16 @@ public class Conexao {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=pi";
-            String usuario = "116128412023.1";
-            String senha = "senac@12841";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=pi;trustServerCertificate=true";
+            String usuario = "user";
+            String senha = "123456";
 
             conexao = DriverManager.getConnection(url, usuario, senha);
 
             if(conexao != null){
-//                System.out.println("conexão com o banco feita com sucesso");
-                return conexao;
+                System.out.println("conexão com o banco feita com sucesso");
+                conexao.close();
+//                return conexao;
             }
         }catch(ClassNotFoundException | SQLException e){
             System.out.println("O Erro foi: " + e);

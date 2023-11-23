@@ -9,13 +9,16 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Conexao conexao = new Conexao();
-
-        conexao.conectar();
-//        Telas telas = new Telas();
-//        WebServer server = new WebServer();
+//        Conexao conexao = new Conexao();
 //
-//        telas.telaInicial();
-//        server.apiServer();
+//        conexao.conectar();
+
+
+        Telas telas = new Telas();
+        WebServer server = new WebServer();
+
+        telas.telaInicial();
+        server.apiServer();
+
     }
 }

@@ -6,50 +6,59 @@ import java.util.List;
 
 public class Sales {
     int id = 0;
-    public String image = "";
-    public String titulo = "";
-    public String subtitulo = "";
-
+    public String pImg = "";
+    public  String pName = "";
+    public  String pPrice = "";
+    public  String pDescri = "";
     public Sales(){
     }
 
-    public Sales(String image, String titulo, String subtitulo){
-
-        this.image = image;
-        this.titulo = titulo;
-        this.subtitulo = subtitulo;
+    public Sales(String pImg, String pName, String pPrice, String pDescri) {
+        this.pImg = pImg;
+        this.pName = pName;
+        this.pPrice = pPrice;
+        this.pDescri = pDescri;
     }
 
-    public String getImage(){
-        return image;
+    public String getpImg() {
+        return pImg;
     }
 
-    public void setImage(String image){
-        this.image = image;
+    public void setpImg(String pImg) {
+        this.pImg = pImg;
     }
 
-    public String getTitulo(){
-        return titulo;
+    public String getpName() {
+        return pName;
     }
 
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
-    public String getSubtitulo(){
-        return subtitulo;
+    public String getpPrice() {
+        return pPrice;
     }
 
-    public void setSubtitulo(String subtitulo){
-        this.subtitulo = subtitulo;
+    public void setpPrice(String pPrice) {
+        this.pPrice = pPrice;
+    }
+
+    public String getpDescri() {
+        return pDescri;
+    }
+
+    public void setpDescri(String pDescri) {
+        this.pDescri = pDescri;
     }
 
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
+        json.put("pImg",pImg);
+        json.put("pName", pName);
+        json.put("pPrice", pPrice);
+        json.put("pDescri",pDescri);
 
-        json.put("image", image);
-        json.put("titulo", titulo);
-        json.put("subtitulo", subtitulo);
 
         return json;
     }
@@ -58,15 +67,16 @@ public class Sales {
         JSONObject json = new JSONObject();
 
         if (!salesList.isEmpty()) {
-            var keyJson = 1;
+            var keyJson = 0;
 
             for (Sales sales : salesList) {
 
                 JSONObject jsonFor = new JSONObject();
 
-                jsonFor.put("image", sales.getImage());
-                jsonFor.put("titulo", sales.getTitulo());
-                jsonFor.put("subtitulo", sales.getSubtitulo());
+                jsonFor.put("pImg", sales.getpImg());
+                jsonFor.put("pName", sales.getpName());
+                jsonFor.put("pPrice", sales.getpPrice());
+                jsonFor.put("pDescri", sales.getpDescri());
 
                 json.put(String.valueOf(keyJson), jsonFor);
 

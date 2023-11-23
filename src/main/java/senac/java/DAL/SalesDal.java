@@ -41,15 +41,16 @@ public class SalesDal {
     }
 
     //Inserir - Create
-    public int inserirVendas(String image, String titulo, String subtitulo) throws SQLException{
-        String sql = "INSERT INTO Sales (image, titulo, subtitulo) VALUES(?, ?, ?)";
+    public int inserirVendas(String pImg, String pName, String pPrice, String pDescri) throws SQLException{
+        String sql = "INSERT INTO Sales (pImg, pName, pPrice, pDescri) VALUES(?, ?, ?, ?)";
         int linhasAfetadas = 0;
         Connection conexao = conectar();
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, image);
-            statement.setString(2, titulo);
-            statement.setString(3, subtitulo);
+            statement.setString(1, pImg);
+            statement.setString(2, pName);
+            statement.setString(3, pPrice);
+            statement.setString(4,pDescri);
 
             linhasAfetadas = statement.executeUpdate();
 
@@ -76,14 +77,16 @@ public class SalesDal {
 
             while (result.next()){
                 int id = result.getInt("id");
-                String image = result.getString("image");
-                String titulo = result.getString("titulo");
-                String subtitulo = result.getString("subtitulo");
+                String pImg = result.getString("pImg");
+                String pName = result.getString("pName");
+                String pPrice = result.getString("pPrice");
+                String pDescri = result.getString("pDescri");
 
                 System.out.println("id: " + id);
-                System.out.println("image: " + image);
-                System.out.println("titulo: " + titulo);
-                System.out.println("subtitulo: " + subtitulo);
+                System.out.println("pImg: " + pImg);
+                System.out.println("pPrice: " + pName);
+                System.out.println("pPrice: " + pPrice);
+                System.out.println("pDescri" + pDescri);
             }
             return result;
 
@@ -94,15 +97,16 @@ public class SalesDal {
 
     }
 
-    public int atualizarVendas(String image, String titulo,String subtitulo, int id) throws SQLException{
-        String sql = "UPDATE Sales SET image = ?, titulo = ?, subtitulo = ?< WHERE id = ?";
+    public int atualizarVendas(String pImg, String pName,String pPrice, int id, String pDescri) throws SQLException{
+        String sql = "UPDATE Sales SET pImg = ?, pName = ?, pPrice = ?, pDescri = ?< WHERE id = ?";
         int linhasAfetadas = 0;
 
         try(PreparedStatement statement = conectar().prepareStatement(sql)){
-            statement.setString(1, image);
-            statement.setString(2, titulo);
-            statement.setString(3, subtitulo);
+            statement.setString(1, pImg);
+            statement.setString(2, pName);
+            statement.setString(3, pPrice);
             statement.setInt(4, id);
+            statement.setString(5,pDescri);
 
             linhasAfetadas = statement.executeUpdate();
 

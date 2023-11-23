@@ -18,26 +18,31 @@ public class WebServer {
     public void apiServer() throws IOException{
 
 
-        HttpServer server = HttpServer.create(new InetSocketAddress(8080),
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000),
                 0);
 
         HttpHandler userHandler = new UsersController.UsersHandler();
-        HttpHandler salesHandler = new SalesController.SalesHandler();
+        HttpHandler salesPersonHandler = new SalesController.SalesHandler();
         HttpHandler productHandler = new ProductController.ProductsHandler();
 
-        server.createContext("/api/vendas", exchange -> {
-            configureCors(exchange);
-            salesHandler.handle(exchange);
-        });
-        server.createContext("/api/usuario",  exchange -> {
+        server.createContext("/api/users", exchange -> {
             configureCors(exchange);
             userHandler.handle(exchange);
         });
+
+        server.createContext("/api/vendedor", exchange -> {
+
+            configureCors(exchange);
+            salesPersonHandler.handle(exchange);
+        });
+
 
         server.createContext("/api/produtos", exchange -> {
             configureCors(exchange);
             productHandler.handle(exchange);
         });
+
+
 
         server.setExecutor(null);
         System.out.println("Servidor Iniciado");
@@ -45,7 +50,9 @@ public class WebServer {
     }
 
     private void configureCors(HttpExchange exchange) {
+
         Headers headers = exchange.getResponseHeaders();
+
         String requestOrigin = exchange.getResponseHeaders().getFirst("Origin");
         if (requestOrigin != null) {
             headers.set("Access-Control-Allow-Origin", requestOrigin);
@@ -54,6 +61,6 @@ public class WebServer {
         headers.set("Access-Control-Allow-Methods", "GET,OPTIONS,POST,PUT,DELETE");
         headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
         headers.set("Access-Control-Allow-Credentials", "true");
-        headers.set("Access-Control-Max-Age", "3600");
+        headers.set("Access-Control-Max-Age","3600");
     }
 }
